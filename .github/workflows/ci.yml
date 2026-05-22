@@ -1,3 +1,5 @@
+const { version, version } = require("react")
+
 name: CI/CD Pipeline
 
 on:
@@ -7,24 +9,20 @@ on:
     branches: [main, develop]
 
 jobs:
-  test:
+  test-build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x]
-
     steps:
-      - uses: actions/checkout@v3
-      
-      - name: Use Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-      
-      - name: Install dependencies
-        run: npm ci
-      
-      - name: Build
-        run: npm run build
+        - name: checkout code 
+        uses: actions/checkout@v3
+
+        - name: Use Node.js
+            uses: actions/setup-node@v3
+            with:
+                node-version: '18'
+
+        - name: lnstall dependencies
+         run: npm install
+
+         - name: build
+         run: npm run build
